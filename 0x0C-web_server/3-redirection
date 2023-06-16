@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# install and setup nginx web server
+sudo apt-get update
+sudo apt-get install nginx -y
+echo "Hello World!" | sudo tee /var/www/html/index.html
+
+# permanently redirects traffic from /redirect_me to anther url
+
+text="\\\n\n\tlocation /redirect_me {\n\t\treturn 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n\t}\n"
+sudo sed -i "53i $text" /etc/nginx/sites-enabled/default
+sudo service nginx start
